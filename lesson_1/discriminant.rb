@@ -18,16 +18,25 @@ Math.sqrt(16)
 =end
 
 puts "Введите a, b и c"
-a = gets.to_i
-b = gets.to_i
-c = gets.to_i
+a = gets.to_f
+b = gets.to_f
+c = gets.to_f
 
 d = b ** 2 - 4 * a * c
 
 if d > 0
-	puts "Дискриминант равен #{d}, а корни квадратного уравнения равны #{(Math.sqrt(d)  - b) / 2 * a} и #{(Math.sqrt(d) * (-1) - b) / 2 * a}"
+	x1 = (Math.sqrt(d)  - b) / 2 * a
+	x2 = (Math.sqrt(d) * (-1) - b) / 2 * a
+
+	if (a * x1 ** 2 + b * x1 + c == 0) && (a * x2 ** 2 + b * x2 + c == 0)
+		puts "Дискриминант равен #{d}, а корни квадратного уравнения равны #{x1} и #{x2}"
+	end
 elsif d == 0
-	puts "Дискриминант равен 0, корень равен #{b * (-1) / 2 * a} "
+	x = b * (-1) / 2 * a
+	if (a * x ** 2 + b * x + c == 0)
+		puts "Дискриминант равен 0, корень равен #{x} "
+	end
+	
 else	
 	puts "корней нет"
 end

@@ -6,7 +6,8 @@
 =end
 
 puts "Введите длину основания треугольника"
-base = gets.to_i
+base = gets.to_f
 puts "Введите высоту треугольника"
-height = gets.to_i
-puts "Площадь треугольника равна #{base * height / 2.0}"
+height = gets.to_f
+area = base * height / 2
+puts "Площадь треугольника равна #{area}"
