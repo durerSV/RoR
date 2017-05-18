@@ -11,28 +11,30 @@
 
 #вещественных чисел (по умолчанию) в руби не нашел - заменил на рациональные
 puts "введите размеры сторон треугольника"
-sides = Array.new()
-sides[0] = gets.to_r
-sides[1] = gets.to_r
-sides[2] = gets.to_r
+sides = []
+sides[0] = gets.to_f
+sides[1] = gets.to_f
+sides[2] = gets.to_f
 
 sides.sort!
+triangle = []
+triangle.push 'Треугольник'
 
-if sides[0] == sides[1] || sides[1] == sides[2]
-	puts "прямоугольник равносторонний"
-	return
-end
- 
-if  sides[1] == sides[2] 
-	print "Треуголник равнобедренный"
-end
 
-if sides[2] ** 2 == sides[1] ** 2 + side_c[0] ** 2
-	puts " и прямоугольный"
+if sides[0] == sides[1] && sides[1] == sides[2]
+	triangle.push 'равносторонний'
+elsif sides[1] == sides[2] 
+	triangle.push'равнобедренный'
+	if sides[2] ** 2 == sides[1] ** 2 + sides[0] ** 2
+		triangle.push 'и прямоугольный'
+	end
+	#puts triangle	
 else
-	puts " и не прямоугольный"
+	if sides[2] ** 2 == sides[1] ** 2 + sides[0] ** 2
+		triangle.push 'прямоугольный'
+	else
+		triangle.push 'не прямоугольный'
+	end
 end
-
-			
-	
+puts "#{triangle.join (' ')}"
 
