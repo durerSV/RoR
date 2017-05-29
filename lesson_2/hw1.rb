@@ -12,8 +12,6 @@ month = {
   november: 30,
   december: 31
 }
-month.each do |month, days|
-  if days.to_i == 30
-    puts month
-  end
+month.each_pair do |month, days|
+  puts month if days == 30
 end

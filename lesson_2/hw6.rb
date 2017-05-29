@@ -9,39 +9,33 @@
 Вычислить и вывести на экран итоговую сумму всех покупок в "корзине".
 =end
 
-hash = Hash.new
+cart = {}
 product = nil
 value = nil
 quantity = nil
 sum = 0
 sum_all = 0
-hash2 = Hash.new
 loop do
   puts "введите название товара или 'стоп' что бы завершить "
-
   product = gets.chomp
   if product.downcase == 'стоп'
     break
+  elsif cart.include? product
+    puts "данный продукт уже внесен в корзину #{cart[product]}" 
+    puts "можете обновить стоимость количество \"y\" /либо ввести новый продукт\"n\" "
+    change = gets.downcase.include? 'n'
+     next if change
   end
-
   puts "введите стоимость за еденицу"
-  value = gets.chomp.to_f
+  price = gets.chomp.to_f
   puts "введите количество"
   quantity = gets.chomp.to_f
-
-  hash[product] = {value => quantity}
+  cart[product] = {price: price, quantity: quantity, sum: price * quantity}
+  sum_all += price * quantity
+  puts cart[product]
 end
-
-
-hash.each do |product,value|
-  value.each do |value,quantity|
-    sum = value * quantity
-  end
-  hash2[product] = sum
-  sum_all += sum
-end
-puts "Итого #{sum}"
-puts "каждый товар #{hash2}"
+cart.each { |a| puts a}
+puts "Итого #{sum_all}"
 
 
 

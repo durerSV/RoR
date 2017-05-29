@@ -1,21 +1,18 @@
 =begin
 3. Заполнить массив числами фибоначчи до 100
 =end
-array = []
-fibonacci = 0
-count = 0
-a = 1
+a = 0
 b = 1
+arr = [0]
 loop do
-  array << fibonacci
-  if (count % 2 == 0)
-    fibonacci = a
-    a += b
-  else
-    fibonacci = b
+  if a > b 
+    arr << a
     b += a
+  else
+    arr << b
+    a += b  
   end
-  count += 1
-break if fibonacci > 100  
+  break if a > 100 || b > 100
+  
 end
-print array
+puts arr

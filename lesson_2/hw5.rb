@@ -11,28 +11,15 @@ month = gets.chomp.to_i
 puts "enter year"
 year = gets.chomp.to_i
 
-leap_year = false
-months = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-days = 0
+if year % 4 == 0 && (year % 100 != 0 || (year % 100 == 0 && year % 400 == 0))  
+  months = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+else
+  months = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+end
 
-if year % 4 == 0
-  leap_year = true
-  if yaer % 100 == 0
-    leap_year = false
-    if year % 400 == 0
-      leap_year = true
-    end
-  end
-end
-iterator = 0
-while iterator < month
-  days += months[iterator]
-  iterator += 1 
-end
-days += day 
-if leap_year && days > 59
-  days += 1
-end
+months.slice!(month..12)
+days = months.sum + day
+
 
 puts "дней до вашей даты #{days}"
 
