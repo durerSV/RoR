@@ -13,7 +13,6 @@ cart = {}
 product = nil
 value = nil
 quantity = nil
-sum = 0
 sum_all = 0
 loop do
   puts "введите название товара или 'стоп' что бы завершить "
