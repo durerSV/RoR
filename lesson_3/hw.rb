@@ -18,11 +18,14 @@ class  Station
     @trains.each {|train| puts train}
   end
   #Может возвращать список всех поездов по типу(грузовой/пассажирский)
-  def type_of_trains type
+  def type_of_trains (type = nill)
+    if type 
      @trains.each do |train|
       if train.type == type
         puts train
       end
+    else
+      @trains.each { |train| puts train}
     end
   end
   #Может отправлять поезда по одному за раз(при этом поезд удалаяется из списка поездов)
@@ -37,8 +40,8 @@ end
 class  Route
   @stations = []
   def initialize(first_stattion, last_station)
-    @stations.push first_station
-    @stations.push last_station
+    @stations = [first_stattion, last_station]
+    
   end
  #А промежуточные станции могут добовляться между ними 
   def add_station station_name
@@ -62,35 +65,37 @@ class  Route
 end
 #Класс Train 
 class Train
+  attr_accessor :speed
   attr_reader :type
-  #Имеет номер, тип(грузовой/пассажирский) и количество вагонов
-  def initialize (train_number, type, quantity_of_car)
+  
+  def initialize (train_number, type)
     @train_number = train_number
     @type = type
-    @quantity_of_car = quantity_of_car
+    @cars = 0
+    speed = 0
   end
-  #Может набирать/возвращать скорость
-  attr_accessor :speed
-
-  #Может тормозить (сбрасывать скорость до нуля)
+  
   def stop
     self.speed = 0
   end
-  #Может возвращать количество вагонов
-  def quantity
-    @quantity_of_car
+  def acceleration (speed = 10 )
+    self.speed += speed
   end
 
-  #Может прицеплять отцеплять вогоны по одному
+  def quantity
+    @cars
+  end
+
+  
   def add_car
     if speed == 0
-      quantity_of_car += 1
+      @cars += 1
     end
   end
 
   def delete_car
-    if speed == 0 
-      quantity_of_car -= 1
+    if speed == 0 && @cars > 0
+      @cars -= 1
     end
   end
   #Может принимать маршрут следования (объект класса Route), при назначении маршрута
@@ -98,7 +103,7 @@ class Train
   def new_route route
     @route = route
     @curent_station = 0
-    @route.station @curent_station.arrival(self) 
+    @route.station [@curent_station].arrival(self) 
     
   end
   #Может перемещаться между станциями указаннымив маршруте, вперед и назад
