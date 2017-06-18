@@ -11,7 +11,7 @@ class Train
   end
 
   def add_carriage(carriage)
-    self.type.eql?(carriage.type) ? ( self.carriages << carriage if speed.zero? ) : ( puts "Тип поезда и вагона не соответствуют." )
+    self.type.eql?(carriage.type) ? ( add_carriage!(carriage) if speed.zero? ) : ( puts "Тип поезда и вагона не соответствуют." )
   end
 
   def unhook_carriage
@@ -28,6 +28,8 @@ class Train
     puts "Текущая станция: #{current_station.title}"
     gets
   end
+  
+
 
   #Перемещение по маршруту
   def move(destination)
@@ -45,13 +47,13 @@ class Train
   def next_station
     position = self.route.stations.index(current_station)
 
-    current_station == self.route.stations.last ? ( puts 'Конечная' ) : self.route.stations[position + 1] 
+     self.route.stations[position + 1] 
   end
 
   def prev_station
     position = self.route.stations.index(current_station)
   
-    current_station == self.route.stations.first ? ( puts 'Конечная' ) : self.route.stations[position - 1]
+    self.route.stations[position - 1]
   end
 
   #Необязательный метод
@@ -83,7 +85,6 @@ class Train
 
   #Текущая станция назначается только при присвоении маршрута и изменяется при перемещении между станциями маршрута.
   def current_station=(station)
-    stop
     station.take_the_train(self)
     @current_station = station
   end
@@ -97,9 +98,8 @@ class Train
       puts "Нечего отцеплять. Кол-во вагонов: #{self.carriages.count}" 
     end
   end
-
-  #Вызов осуществляется только внутри класса Train и его подклассов
-  def current_speed
-    self.speed
+  def add_carriage!(carriage)
+    self.carriages << carriage
   end
+
 end

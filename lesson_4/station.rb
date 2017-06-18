@@ -15,7 +15,7 @@ class Station
         puts "\tпоезд №: #{train.number}"
         puts "\tтип: #{Train::TYPE[train.type]}"
         puts "\tкол-во вагонов: #{train.carriages.count}"
-        puts "\tмаршрут следования: #{train.route.stations.first.title} - #{train.route.stations.last.title}"
+        train.route.name
       end
     end
   end

@@ -1,16 +1,23 @@
 class Route
-  attr_reader :stations, :start_station, :end_station
+  attr_reader :stations
 
   def initialize(start_station, end_station)
     @stations = [start_station, end_station]
-    @start_station = start_station
-    @end_station = end_station
+    
   end
 
+  def start_station
+    @stations[0]
+  end
+  def end_station
+    @stations.last
+  end
   def stations_list
     self.stations.each.with_index(1) { |station, index| puts "#{index}. #{station.title}" }
   end
-
+  def name
+    puts "\tмаршрут следования: #{self.stations[0].title} - #{self.stations.last.title}"
+  end
   def add_station!(station)
     self.stations.insert(-2, station)
     puts "Станция «#{station.title}» добавлена в маршрут #{self.stations.first.title} - #{self.stations.last.title}."
